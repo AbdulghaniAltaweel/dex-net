@@ -41,3 +41,18 @@ metrics:
   force_closure: notset
   robust_force_closure: notset
   robust_partial_closure: notset
+
+#added for grasp sampling
+grasp_sampler:
+  antipodal # or gaussian or uniform
+
+# Grasp Sampling Parameters
+sampling_friction_coef: 0.02
+num_cone_faces: 
+grasp_samples_per_surface_point: 
+#target_num_grasps: #otherwise min_num_grasps
+min_num_grasps: 
+min_contact_dist: 
+num_grasp_rots: 
+max_num_surface_points: #otherwise default value in code 100
+#grasp_dist_thresh: #otherwise default value in code 0
