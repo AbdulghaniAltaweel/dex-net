@@ -949,7 +949,7 @@ class DexNet(object):
         obj = self.dataset[object_name]
 
         vis.figure(bgcolor=(1,1,1), size=(1000,1000))
-        vis.mesh(obj.mesh, color=(0.5, 0.5, 0.5), style='surface')
+        vis.mesh(obj.mesh.trimesh, color=(0.5, 0.5, 0.5), style='surface')
         vis.show(animate=config['animate'])
 
     def display_stable_poses(self, object_name, config=None):
