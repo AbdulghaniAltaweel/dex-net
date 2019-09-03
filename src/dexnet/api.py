@@ -988,7 +988,7 @@ class DexNet(object):
         for stable_pose in stable_poses:
             print 'Stable pose %s with p=%.3f' %(stable_pose.id, stable_pose.p)
             vis.figure()
-            vis.mesh_stable_pose(obj.mesh, stable_pose,
+            vis.mesh_stable_pose(obj.mesh.trimesh, stable_pose.T_obj_world,
                                  color=(0.5, 0.5, 0.5), style='surface')
             vis.pose(RigidTransform(), alpha=0.15)
             vis.show(animate=config['animate'])
@@ -1071,7 +1071,7 @@ class DexNet(object):
                 vis.figure()
                 vis.gripper_on_object(gripper, grasp, object,
                                       gripper_color=(0.25,0.25,0.25),
-                                      stable_pose=stable_pose,
+                                      stable_pose=stable_pose.T_obj_world,
                                       plot_table=False)
                 vis.show(animate=config['animate'])
                 i += 1
