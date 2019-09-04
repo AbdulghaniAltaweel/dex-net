@@ -35,7 +35,14 @@ export_overwrite: True
 
 # Metric params. Ignore this unless you really know what you're doing
 metrics:
-  robust_ferrari_canny: notset
+  robust_ferrari_canny: 
+    quality_type: robust_quasi_static # or quasi_static
+    quality_method: epsilon_quality
+    friction_coef: 0.6 # from Dexnet-2.0 paper
+    num_cone_faces: 5
+    soft_fingers: True
+    num_quality_samples: 10 # neccary only when qualiy_type== robust_quasi_static
+    check_approach: True 
   robust_wrench_resistance: notset
   ferrari_canny: notset
   force_closure: notset
@@ -47,7 +54,7 @@ grasp_sampler:
   antipodal # or gaussian or uniform
 
 # Grasp Sampling Parameters
-sampling_friction_coef: 0.5
+sampling_friction_coef: 0.4
 num_cone_faces: 5 #from Paper: classical grasp quality evaluation: New Algorithm and Theory [36]; Florian & Danica; {better would be 10 due to time and error} 
 grasp_samples_per_surface_point: 1 #default value in code 1
 target_num_grasps: 3 #otherwise min_num_grasps
@@ -57,6 +64,3 @@ num_grasp_rots: 5 # from Dexnet 2 paper. the number of sectors in range of 360°
 max_num_surface_points: 10 #otherwise default value in code 100
 grasp_dist_thresh: 0 #otherwise default value in code 0
 max_grasp_sampling_iters: 3 # in Code 3
-
-
-
