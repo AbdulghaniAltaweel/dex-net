@@ -38,14 +38,13 @@ metrics:
   robust_ferrari_canny: 
     quality_type: robust_quasi_static # or quasi_static
     quality_method: wrench_resistance # or partial_closure
-    friction_coef: 0.6 # from Dexnet-2.0 paper
+    friction_coef: 0.6 # from Dexnet-2.0 paper 0.6
     num_cone_faces: 5
     soft_fingers: True
-    num_quality_samples: 10 # necessary only when qualiy_type== robust_quasi_static
+    num_quality_samples: 10 # @JMR # necessary only when qualiy_type== robust_quasi_static
     check_approach: True
     all_contacts_required: Yes
     sampling_snapshot_rate: 1 # from Code 1# @JMR # see robust_grasp_quality.py
-    num_quality_samples: 10 # @JMR # see robust_grasp_quality.py
   robust_wrench_resistance: notset
   ferrari_canny: notset
   force_closure: notset
@@ -64,13 +63,14 @@ grasp_sampler:
   antipodal # or gaussian or uniform
 
 # Grasp Sampling Parameters
-sampling_friction_coef: 0.4
-num_cone_faces: 5 #from Paper: classical grasp quality evaluation: New Algorithm and Theory [36]; Florian & Danica; {better would be 10 due to time and error} 
-grasp_samples_per_surface_point: 1 #default value in code 1
-target_num_grasps: 3 #otherwise min_num_grasps
+sampling_friction_coef: 0.8 # increasing Value ==> more grasps
+num_cone_faces: 10 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant #from Paper: classical grasp quality evaluation: New Algorithm and Theory [36]; Florian & Danica; {better would be 10 due to time and error} 
+grasp_samples_per_surface_point: 3 #default value in code 1 # this value + 1 make the grasps ~=double
+max_num_surface_points: 50 #otherwise default value in code 100 # increasng ==> more grasps
+target_num_grasps: 200 #otherwise min_num_grasps
 min_num_grasps: 2
-min_contact_dist: 0.005 # to make sure grasp is wide enough # when the calculated grasp is smaller than this. It will be ignored.
-num_grasp_rots: 5 # from Dexnet 2 paper. the number of sectors in range of 360°
-max_num_surface_points: 10 #otherwise default value in code 100
+min_contact_dist: 0.001 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. # in [m] there is then no valid grasps any more#to make sure grasp is wide enough # when the normalized calculated grasp is smaller than this. It will be ignored. # that means grasps smaller than this in [m] will be ignored.
+num_grasp_rots: 20 # not a big diffrence # from Dexnet 2 paper. the number of sectors in range of 360°
+
 grasp_dist_thresh: 0 #otherwise default value in code 0
 max_grasp_sampling_iters: 3 # in Code 3
