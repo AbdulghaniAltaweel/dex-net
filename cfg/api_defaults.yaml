@@ -37,12 +37,13 @@ export_overwrite: True
 metrics:
   robust_ferrari_canny: 
     quality_type: robust_quasi_static # or quasi_static
-    quality_method: epsilon_quality
+    quality_method: wrench_resistance # or partial_closure
     friction_coef: 0.6 # from Dexnet-2.0 paper
     num_cone_faces: 5
     soft_fingers: True
-    num_quality_samples: 10 # neccary only when qualiy_type== robust_quasi_static
-    check_approach: True 
+    num_quality_samples: 10 # necessary only when qualiy_type== robust_quasi_static
+    check_approach: True
+    all_contacts_required: Yes
   robust_wrench_resistance: notset
   ferrari_canny: notset
   force_closure: notset
