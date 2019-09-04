@@ -47,12 +47,16 @@ grasp_sampler:
   antipodal # or gaussian or uniform
 
 # Grasp Sampling Parameters
-sampling_friction_coef: 0.02
-num_cone_faces: 
-grasp_samples_per_surface_point: 
-#target_num_grasps: #otherwise min_num_grasps
-min_num_grasps: 
-min_contact_dist: 
-num_grasp_rots: 
-max_num_surface_points: #otherwise default value in code 100
-#grasp_dist_thresh: #otherwise default value in code 0
+sampling_friction_coef: 0.5
+num_cone_faces: 5 #from Paper: classical grasp quality evaluation: New Algorithm and Theory [36]; Florian & Danica; {better would be 10 due to time and error} 
+grasp_samples_per_surface_point: 1 #default value in code 1
+target_num_grasps: 3 #otherwise min_num_grasps
+min_num_grasps: 2
+min_contact_dist: 0.005 # to make sure grasp is wide enough # when the calculated grasp is smaller than this. It will be ignored.
+num_grasp_rots: 5 # from Dexnet 2 paper. the number of sectors in range of 360°
+max_num_surface_points: 10 #otherwise default value in code 100
+grasp_dist_thresh: 0 #otherwise default value in code 0
+max_grasp_sampling_iters: 3 # in Code 3
+
+
+
