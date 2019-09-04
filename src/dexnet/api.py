@@ -492,6 +492,8 @@ class DexNet(object):
                 gravity_metric_config = copy.copy(metric_config)
 
                 # add gravity wrenches
+                gravity_metric_config.obj_uncertainty = {}
+                gravity_metric_config.grasp_uncertainty = {}
                 for stable_pose in stable_poses:
                     gravity_metric_config.target_wrench = self._gravity_wrench(obj, stable_pose, config['gravity_accel'])
                     gravity_metric_config.obj_uncertainty['R_sample_sigma'] = stable_pose.r.T
