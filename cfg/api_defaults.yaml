@@ -44,11 +44,20 @@ metrics:
     num_quality_samples: 10 # necessary only when qualiy_type== robust_quasi_static
     check_approach: True
     all_contacts_required: Yes
+    sampling_snapshot_rate: 1 # from Code 1# @JMR # see robust_grasp_quality.py
+    num_quality_samples: 10 # @JMR # see robust_grasp_quality.py
   robust_wrench_resistance: notset
   ferrari_canny: notset
   force_closure: notset
   robust_force_closure: notset
   robust_partial_closure: notset
+
+# for computing the wrench exerted by gravity
+gravity_accel: 10 # @ JMR
+
+
+# Number of grasps to compute metrics for before logging a line
+metric_display_rate:  3 #TODO: check this out # test value # @Just Make it RUN (JMR)
 
 #added for grasp sampling
 grasp_sampler:
