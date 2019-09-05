@@ -53,8 +53,8 @@ import time
 
 from autolab_core import Point, RigidTransform, YamlConfig
 import autolab_core.utils as utils
-from gqcnn import Grasp2D
-from gqcnn import Visualizer as vis2d
+from gqcnn.grasping import Grasp2D
+from dexnet.visualization import DexNetVisualizer2D as vis2d
 from meshpy import ObjFile, RenderMode, SceneObject, UniformPlanarWorksurfaceImageRandomVariable
 from perception import CameraIntrinsics, BinaryImage, DepthImage
 
@@ -204,6 +204,7 @@ def generate_gqcnn_dataset(dataset_path,
         phi += phi_inc
 
     # setup collision checking
+    check_collision_Flag = False # to ignore collision checking @ JMR # TODO    
     coll_check_params = config['collision_checking']
     approach_dist = coll_check_params['approach_dist']
     delta_approach = coll_check_params['delta_approach']
@@ -281,8 +282,9 @@ def generate_gqcnn_dataset(dataset_path,
                 candidate_grasps_dict[obj.key] = {}
 
                 # setup collision checker
-                collision_checker = GraspCollisionChecker(gripper)
-                collision_checker.set_graspable_object(obj)
+                if check_collision_Flag:
+                    collision_checker = GraspCollisionChecker(gripper)
+                    collision_checker.set_graspable_object(obj)
 
                 # read in the stable poses of the mesh
                 stable_poses = dataset.stable_poses(obj.key)
@@ -292,10 +294,11 @@ def generate_gqcnn_dataset(dataset_path,
                         candidate_grasps_dict[obj.key][stable_pose.id] = []
 
                         # setup table in collision checker
-                        T_obj_stp = stable_pose.T_obj_table.as_frames('obj', 'stp')
-                        T_obj_table = obj.mesh.get_T_surface_obj(T_obj_stp, delta=table_offset).as_frames('obj', 'table')
-                        T_table_obj = T_obj_table.inverse()
-                        collision_checker.set_table(table_mesh_filename, T_table_obj)
+                        if check_collision_Flag:
+                            T_obj_stp = stable_pose.T_obj_table.as_frames('obj', 'stp')
+                            T_obj_table = obj.mesh.get_T_surface_obj(T_obj_stp, delta=table_offset).as_frames('obj', 'table')
+                            T_table_obj = T_obj_table.inverse()
+                            collision_checker.set_table(table_mesh_filename, T_table_obj)
 
                         # read grasp and metrics
                         grasps = dataset.grasps(obj.key, gripper=gripper.name)
@@ -314,17 +317,19 @@ def generate_gqcnn_dataset(dataset_path,
                                 continue
 
                             # check whether any valid approach directions are collision free
-                            collision_free = False
-                            for phi_offset in phi_offsets:
-                                rotated_grasp = aligned_grasp.grasp_y_axis_offset(phi_offset)
-                                collides = collision_checker.collides_along_approach(rotated_grasp, approach_dist, delta_approach)
-                                if not collides:
-                                    collision_free = True
-                                    break
+                            if check_collision_Flag:
+                                collision_free = False
+                                for phi_offset in phi_offsets:
+                                    rotated_grasp = aligned_grasp.grasp_y_axis_offset(phi_offset)
+                                    collides = collision_checker.collides_along_approach(rotated_grasp, approach_dist, delta_approach)
+                                    if not collides:
+                                        collision_free = True
+                                        break
                     
                             # store if aligned to table
+                            collision_free = True
                             candidate_grasps_dict[obj.key][stable_pose.id].append(GraspInfo(aligned_grasp, collision_free))
-
+                            
                             # visualize if specified
                             if collision_free and config['vis']['candidate_grasps']:
                                 logging.info('Grasp %d' %(aligned_grasp.id))
@@ -548,6 +553,7 @@ def generate_gqcnn_dataset(dataset_path,
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
+    """
     # parse args
     parser = argparse.ArgumentParser(description='Create a GQ-CNN training dataset from a dataset of 3D object models and grasps in a Dex-Net database')
     parser.add_argument('dataset_path', type=str, default=None, help='name of folder to save the training dataset in')
@@ -555,6 +561,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     dataset_path = args.dataset_path
     config_filename = args.config_filename
+    
 
     # handle config filename
     if config_filename is None:
@@ -567,6 +574,14 @@ if __name__ == '__main__':
         dataset_path = os.path.join(os.getcwd(), dataset_path)
     if not os.path.isabs(config_filename):
         config_filename = os.path.join(os.getcwd(), config_filename)
+    """
+    config_filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       '..',
+                                       'cfg/tools/generate_gqcnn_dataset.yaml')
+    
+    dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       '..',
+                                       'myGen/gq-Data/')
 
     # parse config
     config = YamlConfig(config_filename)
