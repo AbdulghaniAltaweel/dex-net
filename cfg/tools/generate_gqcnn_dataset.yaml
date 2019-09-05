@@ -1,5 +1,5 @@
 # Dex-Net Database params
-database_name: /path/to/your/example.hdf5
+database_name: example.hdf5
 
 # Dataset params
 gripper: yumi_metal_spline
@@ -9,12 +9,12 @@ target_objects:
   mini_dexnet:
     - bar_clamp
     - gearbox
-    - nozzle
-    - part1
-    - part3
-    - pawn
-    - turbine_housing
-    - vase
+    #- nozzle
+    #- part1
+    #- part3
+    #- pawn
+    #- turbine_housing
+    #- vase
 
 # Params for random variables controlling the environment (camera intr, camera and object poses)
 env_rv_params:
@@ -61,7 +61,7 @@ table_alignment:
   max_approach_offset: 10 # in degrees
   num_approach_offset_samples: 5
 
-# Collision checking constraint parameters
+# Collision checking constraint parameters # I deactivate it in the code @ JMR  # Only the table mesh is needed now in the Code
 collision_checking:
   table_offset: 0.005
   table_mesh_filename: data/meshes/table.obj
