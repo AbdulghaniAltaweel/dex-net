@@ -37,12 +37,16 @@ export_overwrite: True
 metrics:
   robust_ferrari_canny: 
     quality_type: robust_quasi_static # or quasi_static
-    quality_method: wrench_resistance # or partial_closure
+    quality_method: wrench_resistance # wrench_resistance # or partial_closure
+                         # when choosing an value this causes an error when displaying the grasps
+                         # because this enable computing metric for every stable poses and this make the name of the metric,
+                         # which will be stored at the end of compute metic methode, including the stable pose id. 
+                         # and so the metric name doesn't nmatch the given name in the console any more.
     friction_coef: 0.6 # from Dexnet-2.0 paper 0.6
     num_cone_faces: 5
     soft_fingers: True
     num_quality_samples: 10 # @JMR # necessary only when qualiy_type== robust_quasi_static
-    check_approach: True
+    check_approach: true
     all_contacts_required: Yes
     sampling_snapshot_rate: 1 # from Code 1# @JMR # see robust_grasp_quality.py
   robust_wrench_resistance: notset
@@ -56,26 +60,32 @@ gravity_accel: 10 # @ JMR
 
 
 # Number of grasps to compute metrics for before logging a line
-metric_display_rate:  3 #TODO: check this out # test value # @Just Make it RUN (JMR)
+metric_display_rate:  3 # this just for: how many computation processes should be printed on the screen?
 
 #added for grasp sampling
 grasp_sampler:
   antipodal # or gaussian or uniform
 
 # Grasp Sampling Parameters
-sampling_friction_coef: 0.8 # increasing Value ==> more grasps
-num_cone_faces: 10 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant #from Paper: classical grasp quality evaluation: New Algorithm and Theory [36]; Florian & Danica; {better would be 10 due to time and error} 
-grasp_samples_per_surface_point: 3 #default value in code 1 # this value + 1 make the grasps ~=double
-max_num_surface_points: 50 #otherwise default value in code 100 # increasng ==> more grasps
-target_num_grasps: 200 #otherwise min_num_grasps
+sampling_friction_coef: 0.7 # increasing Value ==> more grasps
+num_cone_faces: 10 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant 
+                   # from Paper: classical grasp quality evaluation: New Algorithm and Theory [36] of  
+                   # Florian & Danica; "better would be 10 due to time and error" 
+grasp_samples_per_surface_point: 4 #default value in code 1 # this value + 1 make the grasps ~=double
+max_num_surface_points: 100 #otherwise default value in code 100 # increasng ==> more grasps
+target_num_grasps: 10 #otherwise min_num_grasps
 min_num_grasps: 2
-min_contact_dist: 0.001 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. # in [m] there is then no valid grasps any more#to make sure grasp is wide enough # when the normalized calculated grasp is smaller than this. It will be ignored. # that means grasps smaller than this in [m] will be ignored.
+min_contact_dist: 0.001 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
+                        # in [m] there is then no valid grasps any more#to make sure grasp is wide enough.
+                        # when the normalized calculated grasp is smaller than this. It will be ignored. 
+                        # that means grasps smaller than this in [m] will be ignored.
 num_grasp_rots: 18 # sample Approach Angle should be enabled :true; grasp_sampler.py
                    # and set Approach Angle should be modified and delta_theta defined
                    # Althoght it still make an Error 
                    # from Dexnet 2 paper. the number of sectors in range of 360°
                    # this to rotate over the grasppoint in planar 
-                   # in this case for PJ-Grasp I make delta_theta in code = 10 and this 18 to cover only 180°  . Symmetrie
-
-grasp_dist_thresh: 0 #otherwise default value in code 0
+                   # in this case for PJ-Grasp I make delta_theta in code = 10 and this 18 to cover only 180° (Symmetrie)
+                   # till now this is Unenabled
+grasp_dist_thresh: 0.000 # otherwise default value in code 0 # in Dexnet-2.0 Paper it is 0.002 
+                         # increasing ==> LESS Grasps
 max_grasp_sampling_iters: 3 # in Code 3

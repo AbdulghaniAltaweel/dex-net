@@ -191,7 +191,7 @@ class GraspSampler:
                     # construct a set of rotated grasps
                     for i in range(self.num_grasp_rots):
                         rotated_grasp = copy.copy(grasp)
-                        rotated_grasp.set_approach_angle(i * delta_theta)
+                        rotated_grasp.set_approach_angle(i * delta_theta) # TODO: define delta_theta to enable rotation over point due to num_grasp_rots in Cfg file
                         candidate_grasps.append(rotated_grasp)                
             else:
                 candidate_grasps = pruned_grasps
