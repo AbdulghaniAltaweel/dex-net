@@ -370,9 +370,9 @@ class DexNet(object):
             sampler = gs.UniformGraspSampler(gripper, config)
 
         # sample grasps
-    #    grasps = sampler.generate_grasps(obj, max_iter=config['max_grasp_sampling_iters'])
-        stable_poses = dataset.stable_poses(obj.key)
-        grasps = sampler.generate_grasps_stable_poses(obj, stable_poses, max_iter=config['max_grasp_sampling_iters'])
+        grasps = sampler.generate_grasps(obj, max_iter=config['max_grasp_sampling_iters'])
+    #    stable_poses = dataset.stable_poses(obj.key)
+    #    grasps = sampler.generate_grasps_stable_poses(obj, stable_poses, max_iter=config['max_grasp_sampling_iters'])
         return grasps
     
     def sample_grasps(self, config=None, object_name=None, gripper_name=None, overwrite=True, stable_pose=None):
