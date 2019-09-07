@@ -577,11 +577,11 @@ if __name__ == '__main__':
     """
     config_filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        '..',
-                                       'cfg/tools/generate_gqcnn_dataset.yaml')
+                                       'cfg/tools/generate_gqcnn_dataset_fDb.yaml')
     
     dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        '..',
-                                       'myGen/gq-Data/')
+                                       'myGen/gq-fDb-Overwrite/')
 
     # parse config
     config = YamlConfig(config_filename)
