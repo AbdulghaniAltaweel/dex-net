@@ -68,12 +68,12 @@ grasp_sampler:
 
 # Grasp Sampling Parameters
 sampling_friction_coef: 0.7 # increasing Value ==> more grasps
-num_cone_faces: 10 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant 
+num_cone_faces: 5 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant 
                    # from Paper: classical grasp quality evaluation: New Algorithm and Theory [36] of  
                    # Florian & Danica; "better would be 10 due to time and error" 
 grasp_samples_per_surface_point: 4 #default value in code 1 # this value + 1 make the grasps ~=double
-max_num_surface_points: 100 #otherwise default value in code 100 # increasng ==> more grasps
-target_num_grasps: 10 #otherwise min_num_grasps
+max_num_surface_points: 50 #otherwise default value in code 100 # increasng ==> more grasps
+target_num_grasps: 3 #otherwise min_num_grasps
 min_num_grasps: 2
 min_contact_dist: 0.001 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
                         # in [m] there is then no valid grasps any more#to make sure grasp is wide enough.

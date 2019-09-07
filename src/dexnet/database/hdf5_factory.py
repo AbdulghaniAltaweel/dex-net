@@ -91,7 +91,7 @@ class Hdf5ObjectFactory(object):
                 x0 = data[stp_key].attrs[STABLE_POSE_PT_KEY]
             except:
                 x0 = np.zeros(3)
-            stable_poses.append(stp.StablePose(p, r, x0, stp_id=stp_key))
+            stable_poses.append(stp.StablePose(p, r, x0, stp_id=stp_key)) # here finding stable poses with meshpy
         return stable_poses
 
     @staticmethod
