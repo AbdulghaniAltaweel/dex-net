@@ -581,7 +581,7 @@ if __name__ == '__main__':
     
     dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        '..',
-                                       'myGen/gq-fDb-Overwrite/')
+                                       'myGen/gq-fD-without-stable-poses/')
 
     # parse config
     config = YamlConfig(config_filename)

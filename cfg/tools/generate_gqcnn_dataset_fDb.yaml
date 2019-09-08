@@ -1,14 +1,14 @@
 # Dex-Net Database params
-database_name: myGen/fDb.hdf5
+database_name: fer.hdf5
 
 # Dataset params
-gripper: baxter
+gripper: yumi_metal_spline
 
 # Target objects
 target_objects:
-  fDs:
+  Ds-without-SP:
+    - advil_liqui_gels 
     - flashlight
-    - advil_liqui_gels
     
 # Params for random variables controlling the environment (camera intr, camera and object poses)
 env_rv_params:
