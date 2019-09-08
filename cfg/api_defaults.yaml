@@ -37,7 +37,7 @@ export_overwrite: True
 metrics:
   robust_ferrari_canny: 
     quality_type: robust_quasi_static # or quasi_static
-    quality_method: wrench_resistance # wrench_resistance # or partial_closure
+    quality_method: ferrari_canny_L1 # wrench_resistance # wrench_resistance # or partial_closure
                          # when choosing an value this causes an error when displaying the grasps
                          # because this enable computing metric for every stable poses and this make the name of the metric,
                          # which will be stored at the end of compute metic methode, including the stable pose id. 
@@ -46,9 +46,9 @@ metrics:
     num_cone_faces: 5
     soft_fingers: True
     num_quality_samples: 10 # @JMR # necessary only when qualiy_type== robust_quasi_static
-    check_approach: true
-    all_contacts_required: Yes
-    sampling_snapshot_rate: 1 # from Code 1# @JMR # see robust_grasp_quality.py
+    check_approach: False
+    all_contacts_required: 1
+    sampling_snapshot_rate: 3 # from Code 1# @JMR # see robust_grasp_quality.py # Print on screen maybe
   robust_wrench_resistance: notset
   ferrari_canny: notset
   force_closure: notset

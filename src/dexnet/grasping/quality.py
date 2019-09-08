@@ -699,8 +699,10 @@ class PointGraspMetrics3D:
         b = cvx.matrix(np.ones(1))         # combinations of vertices
 
         sol = cvx.solvers.qp(P, q, G, h, A, b)
-        v = np.array(sol['x'])
-        min_norm = np.sqrt(sol['primal objective'])
-
+        v = np.array(sol['x'])       
+        #if sol['primal objective']<0 or sol['primal objective']>1000 :
+         #   print ("STOP")
+          #  print (sol['primal objective'])
+        min_norm = np.sqrt(abs(sol['primal objective']))
         return abs(min_norm), v
 
