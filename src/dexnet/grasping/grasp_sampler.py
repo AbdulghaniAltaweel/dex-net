@@ -135,7 +135,7 @@ class GraspSampler:
         return grasps
         
     def generate_grasps(self, graspable, target_num_grasps=None, grasp_gen_mult=5, max_iter=3,
-                        sample_approach_angles=False, vis=False, **kwargs):
+                        sample_approach_angles=True, vis=False, **kwargs):
         """Samples a set of grasps for an object.
 
         Parameters
@@ -163,6 +163,7 @@ class GraspSampler:
 
         grasps = []
         k = 1
+        delta_theta = 15
         while num_grasps_remaining > 0 and k <= max_iter:
             # SAMPLING: generate more than we need
             num_grasps_generate = grasp_gen_mult * num_grasps_remaining
@@ -191,7 +192,8 @@ class GraspSampler:
                     # construct a set of rotated grasps
                     for i in range(self.num_grasp_rots):
                         rotated_grasp = copy.copy(grasp)
-                        rotated_grasp.set_approach_angle(i * delta_theta) # TODO: define delta_theta to enable rotation over point due to num_grasp_rots in Cfg file
+                        # rotated_grasp.set_approach_angle(i * delta_theta) # TODO: define delta_theta to enable rotation over point due to num_grasp_rots in Cfg file
+                        rotated_grasp.approach_angle = (i * delta_theta) 
                         candidate_grasps.append(rotated_grasp)                
             else:
                 candidate_grasps = pruned_grasps
