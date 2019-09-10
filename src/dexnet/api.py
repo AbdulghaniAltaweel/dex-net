@@ -473,7 +473,7 @@ class DexNet(object):
         metric_dict = config['metrics']
         if metric_name is not None and metric_name in metric_dict.keys():
             metric_dict = {metric_name: config['metrics'][metric_name]}
-
+        highstquality = 0
         # compute grasp metrics
         logger.info('Computing metrics')
         grasp_metrics = {}
@@ -560,8 +560,10 @@ class DexNet(object):
                         q = quality_fn(grasp)
                         e = time.time()
                         grasp_metrics[grasp.id][metric_name] = q.quality
-
-        # store the grasp metrics
+                        if q.quality > highstquality:
+                            highstquality = q.quality
+        # store the grasp metrics       
+        print("highst quality metric = " + str(highstquality))
         self.dataset.store_grasp_metrics(obj.key, grasp_metrics, gripper=gripper.name,
                                          force_overwrite=True)
 
@@ -1056,7 +1058,7 @@ class DexNet(object):
             return
                      
         low = np.min(metrics)
-        high = np.max(metrics)
+        high = np.max(metrics) 
         if low == high:
             q_to_c = lambda quality: config['quality_scale']
         else:
@@ -1067,6 +1069,7 @@ class DexNet(object):
             stable_pose = self.dataset.stable_pose(object.key, 'pose_1')
             for grasp, metric in zip(grasps, metrics):
                 if metric <= config['min_metric']:
+                    print("highst quality metric =" + str(high)) # check changes of quality metric
                     continue                 
 
                 print 'Grasp %d %s=%.5f' %(grasp.id, metric_name, metric)
@@ -1102,7 +1105,7 @@ class DexNet(object):
                 i += 1
                 if i >= config['max_plot_gripper']:
                     break
-
+            print("highst quality metric =" + str(high)) # check changes of quality metric
             vis.show(animate=config['animate'])
 
     def delete_object(self, object_name):
