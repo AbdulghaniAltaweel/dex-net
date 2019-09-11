@@ -88,6 +88,7 @@ celerybeat-schedule
 venv/
 ENV/
 envCpuPy/
+myEnvCpuPy
 .vscode/
 
 # Spyder project settings
