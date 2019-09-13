@@ -494,16 +494,13 @@ class DexNet(object):
                 gravity_metric_config = copy.copy(metric_config)
 
                 # add gravity wrenches
-                gravity_metric_config.obj_uncertainty = {}
-                gravity_metric_config.grasp_uncertainty = {}
+               # gravity_metric_config.obj_uncertainty = {}
+               # gravity_metric_config.grasp_uncertainty = {}
                 for stable_pose in stable_poses:
                     gravity_metric_config.target_wrench = self._gravity_wrench(obj, stable_pose, config['gravity_accel'])
                     gravity_metric_config.obj_uncertainty['R_sample_sigma'] = stable_pose.r.T
                     gravity_metric_config.grasp_uncertainty['R_sample_sigma'] = stable_pose.r.T
-                    metric_names.append(metric_name + '_' + stable_pose.id) # this cause an error when dispalying grasps. 
-                                                                            # Because the metric name now indlude the stable pose id 
-                                                                            # and so does not match the metric name "robust_ferrari_canny" any more
-                                                                            # TODO check this while generating gqcnn dataset before correcting it 
+                    metric_names.append(metric_name + '_' + stable_pose.id) 
                     metric_configs.append(gravity_metric_config)
 
             # compute metrics for each config
