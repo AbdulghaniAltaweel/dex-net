@@ -163,7 +163,7 @@ class GraspSampler:
 
         grasps = []
         k = 1
-        delta_theta = 15
+        delta_theta = 11.25
         while num_grasps_remaining > 0 and k <= max_iter:
             # SAMPLING: generate more than we need
             num_grasps_generate = grasp_gen_mult * num_grasps_remaining
