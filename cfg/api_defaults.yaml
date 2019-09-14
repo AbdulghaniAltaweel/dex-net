@@ -50,10 +50,10 @@ metrics:
     num_cone_faces: 8
     soft_fingers: 1
     check_approach: 0
-    all_contacts_required: 1 # no difference
-    
+    all_contacts_required: 1 
+
     # sampling params
-    num_quality_samples: 25 # no diefferences # @JMR # necessary only when qualiy_type== robust_quasi_static
+    num_quality_samples: 5 #25 # no diefferences # @JMR # necessary only when qualiy_type== robust_quasi_static
     sampling_snapshot_rate: 10 # from Code 1 # see robust_grasp_quality.py # Print on screen
    
     # optional deterministic parameters
@@ -63,37 +63,31 @@ metrics:
 
     # PARAMS for robust grasp metrics
     # uncertainty
-#    grasp_uncertainty:
-#      sigma_grasp_trans_x: 0.001
-#      sigma_grasp_trans_y: 0.001
-#      sigma_grasp_trans_z: 0.001
-#      sigma_grasp_rot_x: 0.001
-#      sigma_grasp_rot_y: 0.001
-#      sigma_grasp_rot_z: 0.001
-#      sigma_gripper_open_width: 0.01
-#      sigma_gripper_close_width: 0.01
-#      sigma_grasp_approach: 0.01
-#      num_prealloc_samples: 0
-#    obj_uncertainty:
-#      sigma_obj_trans_x: 0.005
-#      sigma_obj_trans_y: 0.005
-#      sigma_obj_trans_z: 0.005
-#      sigma_obj_rot_x: 0.01
-#      sigma_obj_rot_y: 0.01
-#      sigma_obj_rot_z: 0.01
-#      sigma_obj_scale: 0.00
-#      sigma_obj_com: 0.01
-#      num_prealloc_samples: 10
-#    params_uncertainty:
-#      sigma_friction_coef: 0.1
-#      sigma_torque_scaling: 10.0
-#      num_prealloc_samples: 0
-
-  robust_wrench_resistance: notset
-  ferrari_canny: notset
-  force_closure: notset
-  robust_force_closure: notset
-  robust_partial_closure: notset
+ #   grasp_uncertainty:
+ #     sigma_grasp_trans_x: 0.001
+ #     sigma_grasp_trans_y: 0.001
+ #     sigma_grasp_trans_z: 0.001
+ #     sigma_grasp_rot_x: 0.001
+ #     sigma_grasp_rot_y: 0.001
+ #     sigma_grasp_rot_z: 0.001
+  #    sigma_gripper_open_width: 0.01
+  #    sigma_gripper_close_width: 0.01
+  #    sigma_grasp_approach: 0.01
+   #   num_prealloc_samples: 0
+  #  obj_uncertainty:
+   #   sigma_obj_trans_x: 0.005
+ #     sigma_obj_trans_y: 0.005
+  #    sigma_obj_trans_z: 0.005
+  ##    sigma_obj_rot_x: 0.01
+  #    sigma_obj_rot_y: 0.01
+   #   sigma_obj_rot_z: 0.01
+   ##   sigma_obj_scale: 0.00
+   #   sigma_obj_com: 0.01
+   #   num_prealloc_samples: 10
+    #params_uncertainty:
+ #     sigma_friction_coef: 0.1
+ #     sigma_torque_scaling: 10.0
+  #    num_prealloc_samples: 0
 
 #added for grasp sampling
 grasp_sampler:
@@ -106,9 +100,9 @@ num_cone_faces: 8 # Nicht Beobachtbar #No. of Grasps is changing randomly when t
                    # Florian & Danica; "better would be 10 due to time and error" 
 grasp_samples_per_surface_point: 2 #default value in code 1 # this value + 1 make the grasps ~=double
 max_num_surface_points: 100 #otherwise default value in code 100 # increasng ==> more grasps
-target_num_grasps: 100 #otherwise min_num_grasps
+target_num_grasps: 5 #100 #otherwise min_num_grasps
 min_num_grasps: 2
-min_contact_dist: 0.0000 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
+min_contact_dist: 0.000 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
                         # in [m] there is then no valid grasps any more#to make sure grasp is wide enough.
                         # when the normalized calculated grasp is smaller than this. It will be ignored. 
                         # that means grasps smaller than this in [m] will be ignored.

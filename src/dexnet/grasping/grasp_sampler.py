@@ -126,6 +126,7 @@ class GraspSampler:
                                                 max_iter=max_iter, vis=vis)
         
         # align for each stable pose
+        
         grasps = {}
         for stable_pose in stable_poses:
             grasps[stable_pose.id] = []
@@ -133,9 +134,19 @@ class GraspSampler:
                 aligned_grasp = grasp.perpendicular_table(grasp)
                 grasps[stable_pose.id].append(copy.deepcopy(aligned_grasp))
         return grasps
+        '''
+        grasps = {}
+        for i, stable_pose in enumerate(stable_poses):            
+            for j, grasp in enumerate(unaligned_grasps):
+                grasps[i+j] = []
+                aligned_grasp = grasp.perpendicular_table(grasp)
+                x=i+j
+                grasps[x].append(copy.deepcopy(aligned_grasp))
+        return grasps
+        '''
         
     def generate_grasps(self, graspable, target_num_grasps=None, grasp_gen_mult=5, max_iter=3,
-                        sample_approach_angles=True, vis=False, **kwargs):
+                        sample_approach_angles=False, vis=False, **kwargs):
         """Samples a set of grasps for an object.
 
         Parameters
