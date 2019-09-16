@@ -151,6 +151,7 @@ class RobustPointGraspMetrics3D:
         snapshot_rate = quality_config['sampling_snapshot_rate']
         num_samples = quality_config['num_quality_samples']
         objective = RandomContinuousObjective()
+        #objective = CrossEntropyLoss()
         ua = GaussianUniformAllocationMean(objective, candidates)
         ua_result = ua.solve(termination_condition = MaxIterTerminationCondition(num_samples),
                              snapshot_rate = snapshot_rate)

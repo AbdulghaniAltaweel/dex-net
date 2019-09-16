@@ -135,7 +135,7 @@ class GraspSampler:
         return grasps
         
     def generate_grasps(self, graspable, target_num_grasps=None, grasp_gen_mult=5, max_iter=3,
-                        sample_approach_angles=True, vis=False, **kwargs):
+                        sample_approach_angles=False, vis=False, **kwargs):
         """Samples a set of grasps for an object.
 
         Parameters
