@@ -995,7 +995,7 @@ class DexNet(object):
             print 'Stable pose %s with p=%.3f' %(stable_pose.id, stable_pose.p)
             vis.figure()
             vis.mesh_stable_pose(obj.mesh.trimesh, stable_pose.T_obj_world,
-                                 color=(0.5, 0.5, 0.5), style='surface')
+                                 dim=0.15, color=(0.5, 0.5, 0.5), style='surface')
             vis.pose(RigidTransform(), alpha=0.15)
             vis.show(animate=config['animate'])
             
