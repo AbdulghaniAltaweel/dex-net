@@ -121,12 +121,13 @@ class DexNet_cli(object):
            5: ('Display object', 'display_object'),
            6: ('Display stable poses for object', 'display_stable_poses'),
            7: ('Display grasps for object', 'display_grasps'),
-           8: ('Generate simulation data for object', 'compute_simulation_data'),
-           9: ('Compute metadata', 'compute_metadata'),
-           10:('Display metadata', 'display_metadata'),
-           11:('Export objects', 'export_objects'),
-           12:('Set config (advanced)', 'set_config'),
-           13:('Quit', 'close')
+           8: ('Delete an Object', 'delete_object' ),
+           9: ('Generate simulation data for object', 'compute_simulation_data'),
+           10: ('Compute metadata', 'compute_metadata'),
+           11:('Display metadata', 'display_metadata'),
+           12:('Export objects', 'export_objects'),
+           13:('Set config (advanced)', 'set_config'),
+           14:('Quit', 'close')
            }
 
     def __init__(self):
