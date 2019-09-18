@@ -42,8 +42,8 @@ metrics:
   robust_ferrari_canny: 
     quality_type: robust_quasi_static  # or quasi_static
     quality_method: ferrari_canny_L1 # wrench_resistance # wrench_resistance # or partial_closure
-    friction_coef: 0.9 # from Dexnet-2.0 paper 0.6
-    num_cone_faces: 10
+    friction_coef: 0.5 # from Dexnet-2.0 paper 0.6
+    num_cone_faces: 8
     soft_fingers: 1
     check_approach: 0
     all_contacts_required: 1 # no difference
@@ -54,55 +54,55 @@ metrics:
    
     # optional deterministic parameters
     torque_scaling: 10000 #0.1 #10000
-    wrench_norm_thresh: 0.001
-    wrench_regularizer: 0.0000000001
+    wrench_norm_thresh: 0.01
+    wrench_regularizer: 0.00009
 
     # PARAMS for robust grasp metrics
     # uncertainty
     grasp_uncertainty:
-      sigma_grasp_trans_x: 0.000001 #0.001
-      sigma_grasp_trans_y: 0.000001 #0.001
-      sigma_grasp_trans_z: 0.000001 #0.001
-      sigma_grasp_rot_x: 0.000001 #0.001
-      sigma_grasp_rot_y: 0.000001 #0.001
-      sigma_grasp_rot_z: 0.000001 #0.001
-      sigma_gripper_open_width: 0.000001
-      sigma_gripper_close_width: 0.000001
-      sigma_grasp_approach: 0.000001 #0.01
-      num_prealloc_samples: 10
+      sigma_grasp_trans_x: 0.000001 #0.000001 #0.001
+      sigma_grasp_trans_y: 0.000001 #0.000001 #0.001
+      sigma_grasp_trans_z: 0.000001 #0.000001 #0.001
+      sigma_grasp_rot_x: 0.000001 #0.000001 #0.001
+      sigma_grasp_rot_y: 0.000001 #0.000001 #0.001
+      sigma_grasp_rot_z: 0.000001 #0.000001 #0.001
+      sigma_gripper_open_width: 0.00001 #0.000001 #0.01  #########################
+      sigma_gripper_close_width: 0.00001 #0.000001 #0.01 #########################
+      sigma_grasp_approach: 0.01 #0.000001 #0.01
+      num_prealloc_samples:  0 #0
     obj_uncertainty:
-      sigma_obj_trans_x: 0.000001
-      sigma_obj_trans_y: 0.000001
-      sigma_obj_trans_z: 0.000001
-      sigma_obj_rot_x: 0.000001
-      sigma_obj_rot_y: 0.000001
-      sigma_obj_rot_z: 0.000001
-      sigma_obj_scale: 0.000001 # 0.000001
-      sigma_obj_com: 0.000001
-      num_prealloc_samples: 10
+      sigma_obj_trans_x: 0.0000005 #0.000001 #0.005 ########################
+      sigma_obj_trans_y: 0.0000005 #0.000001 #0.005 ########################
+      sigma_obj_trans_z: 0.0000005 #0.000001 #0.005 ########################
+      sigma_obj_rot_x: 0.0000001 #0.000001 #0.01  ######################
+      sigma_obj_rot_y: 0.0000001 #0.000001 #0.01  ######################
+      sigma_obj_rot_z: 0.0000001 #0.000001 #0.01  ###################### 
+      sigma_obj_scale: 0 #0.000001 #0 
+      sigma_obj_com: 0.001 #0.000001 #0.01    #######################
+      num_prealloc_samples: 10 #10
     params_uncertainty:
-      sigma_friction_coef: 0.000001
-      sigma_torque_scaling: 0.000001
-      num_prealloc_samples: 10
+      sigma_friction_coef: 0.0001 #0.000001 #0.1  #####################
+      sigma_torque_scaling: 10 #0.000001 #10
+      num_prealloc_samples: 0 #0            ##################
 
 #added for grasp sampling
 grasp_sampler:
   antipodal # or gaussian or uniform
 
 # Grasp Sampling Parameters
-sampling_friction_coef: 0.4 #0.75 # increasing Value ==> more grasps
-num_cone_faces: 10 #8 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant 
+sampling_friction_coef: 0.75 #0.75 # increasing Value ==> more grasps
+num_cone_faces: 8 #8 # Nicht Beobachtbar #No. of Grasps is changing randomly when this is even constant 
                    # from Paper: classical grasp quality evaluation: New Algorithm and Theory [36] of  
                    # Florian & Danica; "better would be 10 due to time and error" 
 grasp_samples_per_surface_point: 2 #2 #default value in code 1 # this value + 1 make the grasps ~=double
 max_num_surface_points: 100 #100 #otherwise default value in code 100 # increasng ==> more grasps
 target_num_grasps: 100 #100 #otherwise min_num_grasps
 min_num_grasps: 2 
-min_contact_dist: 0.0000 #0.00 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
+min_contact_dist: 0.00 #0.00 # stay in range [mm] and it make no big difference in [mm] to the number of grasps. 
                         # in [m] there is then no valid grasps any more#to make sure grasp is wide enough.
                         # when the normalized calculated grasp is smaller than this. It will be ignored. 
                         # that means grasps smaller than this in [m] will be ignored.
 num_grasp_rots: 32 #32 # in grasp_sampler.py sample_approach_angles must be true
-grasp_dist_thresh: 0.0000 # 0.0025# otherwise default value in code 0 # in Dexnet-2.0 Paper it is 0.002 
+grasp_dist_thresh: 0.0025 # 0.0025# otherwise default value in code 0 # in Dexnet-2.0 Paper it is 0.002 
                          # increasing ==> LESS Grasps
 max_grasp_sampling_iters: 10 #10 # in Code 3
