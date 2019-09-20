@@ -15,7 +15,7 @@ obj_density: 4000.0
 use_uniform_com: True
 
 rescale_objects: True
-obj_target_scale: 0.040
+obj_target_scale: 0.050
 obj_scaling_mode: min
 
 # Visualization params
@@ -53,7 +53,7 @@ metrics:
     sampling_snapshot_rate: 10 # from Code 1 # see robust_grasp_quality.py # Print on screen
    
     # optional deterministic parameters
-    torque_scaling: 10000 #0.1 #10000
+    torque_scaling: 1000 #0.1 #10000
     wrench_norm_thresh: 0.01
     wrench_regularizer: 0.00009
 
@@ -66,24 +66,24 @@ metrics:
       sigma_grasp_rot_x: 0.000001 #0.000001 #0.001
       sigma_grasp_rot_y: 0.000001 #0.000001 #0.001
       sigma_grasp_rot_z: 0.000001 #0.000001 #0.001
-      sigma_gripper_open_width: 0.00001 #0.000001 #0.01  #########################
-      sigma_gripper_close_width: 0.00001 #0.000001 #0.01 #########################
+      sigma_gripper_open_width: 0.01 #0.000001 #0.01  
+      sigma_gripper_close_width: 0.01 #0.000001 #0.01 
       sigma_grasp_approach: 0.01 #0.000001 #0.01
       num_prealloc_samples:  0 #0
     obj_uncertainty:
-      sigma_obj_trans_x: 0.0000005 #0.000001 #0.005 ########################
-      sigma_obj_trans_y: 0.0000005 #0.000001 #0.005 ########################
-      sigma_obj_trans_z: 0.0000005 #0.000001 #0.005 ########################
-      sigma_obj_rot_x: 0.0000001 #0.000001 #0.01  ######################
-      sigma_obj_rot_y: 0.0000001 #0.000001 #0.01  ######################
-      sigma_obj_rot_z: 0.0000001 #0.000001 #0.01  ###################### 
+      sigma_obj_trans_x: 0.000001 #0.000001 #0.005 ########################
+      sigma_obj_trans_y: 0.000001 #0.000001 #0.005 ########################
+      sigma_obj_trans_z: 0.000001 #0.000001 #0.005 ########################
+      sigma_obj_rot_x: 0.000001 #0.000001 #0.01  ######################
+      sigma_obj_rot_y: 0.000001 #0.000001 #0.01  ######################
+      sigma_obj_rot_z: 0.000001 #0.000001 #0.01  ###################### 
       sigma_obj_scale: 0 #0.000001 #0 
-      sigma_obj_com: 0.001 #0.000001 #0.01    #######################
+      sigma_obj_com: 0.01 #0.000001 #0.01    
       num_prealloc_samples: 10 #10
     params_uncertainty:
-      sigma_friction_coef: 0.0001 #0.000001 #0.1  #####################
+      sigma_friction_coef: 0.1 #0.000001 #0.1  
       sigma_torque_scaling: 10 #0.000001 #10
-      num_prealloc_samples: 0 #0            ##################
+      num_prealloc_samples: 0 #0            
 
 #added for grasp sampling
 grasp_sampler:

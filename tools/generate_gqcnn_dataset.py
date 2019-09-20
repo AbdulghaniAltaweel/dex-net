@@ -204,7 +204,7 @@ def generate_gqcnn_dataset(dataset_path,
         phi += phi_inc
 
     # setup collision checking
-    check_collision_Flag = False # to ignore collision checking @ JMR # TODO    
+    check_collision_Flag = True # to ignore collision checking @ JMR # TODO    
     coll_check_params = config['collision_checking']
     approach_dist = coll_check_params['approach_dist']
     delta_approach = coll_check_params['delta_approach']
@@ -577,11 +577,11 @@ if __name__ == '__main__':
     """
     config_filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        '..',
-                                       'cfg/tools/generate_gqcnn_dataset_fDb.yaml')
+                                       'cfg/tools/generate_gqcnn_dataset_287_ABC.yaml')
     
     dataset_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        '..',
-                                       'myGen/gq-fD-without-stable-poses/')
+                                       'myGen/287-ABC-DEX/')
 
     # parse config
     config = YamlConfig(config_filename)
